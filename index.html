@@ -4,8 +4,127 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>frontend </title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <!-- Site header / banner -->
+    <header class="site-header" role="banner">
+        <div class="top-accent" aria-hidden="true"></div>
+        <div class="container">
+            <!-- Logo / home link -->
+            <a href="/" class="logo" aria-label="Homepage">
+                <!-- simple SVG logo approximation -->
+                <svg width="92" height="48" viewBox="0 0 140 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M18 62 C45 12, 110 12, 130 38" fill="none" stroke="#e94157" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+                    <circle cx="34" cy="30" r="12" fill="#e94157" />
+                </svg>
+                <div class="brand">
+                    <div class="company">COMPANY</div>
+                    <div class="tag">business tagline</div>
+                </div>
+            </a>
+
+            <!-- Mobile nav toggle (checkbox) -->
+            <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true">
+            <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true" aria-controls="main-navigation" aria-label="Toggle navigation">
+                <span></span>
+            </label>
+
+            <!-- Main navigation -->
+            <nav id="main-navigation" class="main-nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Services</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </nav>
+            <!-- Header actions (primary CTA) -->
+            <div class="actions">
+                <button class="cta" type="button">Get A Quote</button>
+            </div>
+        </div>
+    </header>
+    <!-- Main content -->
+    <main class="hero" role="main" aria-label="Main content">
+        <div class="hero-inner container">
+            <!-- Hero left: headline and CTAs -->
+            <div class="hero-left">
+                <h1 class="hero-title">Your Resume <span class="accent">Deserves A Yes</span> Let's<br>Make It Happen</h1>
+                <p class="hero-lead">If Your Resume Isn't Getting Responses, It's Time For An Upgrade.
+                Get An ATS-Optimized Resume Crafted By HR Experts To Help You
+                Land More Interviews. Our Resumes Are Designed To Get Your Foot
+                In The Door And Place Your Name At The Top Of The Shortlist.</p>
+
+                <div class="hero-ctas">
+                    <button class="btn btn-outline">RESUME PACKAGES</button>
+                    <button class="btn btn-primary">CONTACT US</button>
+                </div>
+            </div>
+
+            <!-- Hero right: image and floating cards -->
+            <div class="hero-right">
+                <div class="hero-visual">
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Student holding books and a phone" />
+                    </figure>
+
+                    <div class="rating-card" role="status" aria-label="Instructor rating 4.9 out of 5">
+                        <div class="rating-value">4.9</div>
+                        <div class="rating-stars" aria-hidden="true">★★★★★</div>
+                        <div class="rating-text">Instructor Rating</div>
+                    </div>
+
+                    <div class="stats-card" aria-hidden="true">
+                        <div class="stats-icon">🎓</div>
+                        <div class="stats-number">260+</div>
+                        <div class="stats-text">Online Resume Created</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <section class="what-you-get">
+        <div class="container">
+            <div class="eyebrow">What You Get</div>
+            <h2 class="section-title">You’re Not Just Another Applicant And Your Resume Shouldn’t Look Like One</h2>
+
+            <div class="cards">
+                <article class="card">
+                    <div class="card-illustration">
+                        <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="illustration" />
+                    </div>
+                    <h3 class="card-title">A Resume That Passes ATS Filters</h3>
+                    <p class="card-body">Get a professionally written, keyword-optimized resume that lands in recruiter inboxes—not rejection piles.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-illustration">
+                        <img src="https://images.unsplash.com/photo-1505678261036-a3fcc5e884ee?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="illustration" />
+                    </div>
+                    <h3 class="card-title">A Cover Letter That Gets Read</h3>
+                    <p class="card-body">Stand out with a cover letter that speaks directly to the role and reflects your strengths.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-illustration">
+                        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="illustration" />
+                    </div>
+                    <h3 class="card-title">A LinkedIn Profile That Works For You</h3>
+                    <p class="card-body">Attract the right eyes, start conversations, and show up in recruiter searches.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-illustration">
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="illustration" />
+                    </div>
+                    <h3 class="card-title">Interview Confidence</h3>
+                    <p class="card-body">Interview preparation with real HR professionals so you speak clearly, confidently, and convincingly.</p>
+                </article>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
