@@ -36,9 +36,17 @@ body {
 /* Simple container helper used across sections */
 .container {
 	width: 100%;
-	max-width: 90%;
+	/* limit content width on very large screens while remaining fluid */
+	max-width: 1320px;
 	margin: 0 auto;
 	padding: 0 22px;
+}
+
+/* Make images reliably responsive across the site */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 /* -----------------------------
@@ -172,7 +180,7 @@ body {
 	 Hero
 	 ----------------------------- */
 .hero {
-	padding: 80px 0 0;
+	padding: 80px 0 80px;
 	background: linear-gradient(90deg, #ffd5db 0%, #ffe7ea 100%);
 	/* allow the hero to size with content instead of forcing viewport height */
 	min-height: 60vh;
@@ -221,9 +229,12 @@ body {
 
 .hero-ctas {
 	margin-top: 24px;
+	margin-bottom: 20px;
 	display: flex;
 	gap: 12px;
 	flex-wrap: wrap;
+	align-items: center;
+	justify-content: flex-start;
 }
 
 .btn {
@@ -234,6 +245,8 @@ body {
 	border: none;
 	cursor: pointer;
 	min-height: 44px;
+	flex: 0 0 auto;
+	white-space: nowrap;
 }
 
 .btn-outline {
@@ -254,7 +267,9 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	/* avoid negative margins which can cause overlap on smaller screens */
 	margin-bottom: 0;
+	min-width: 0;
 }
 
 .hero-visual {
@@ -291,19 +306,22 @@ figure {
 	gap: 12px;
 	align-items: center;
 	transition: transform 200ms ease, opacity 200ms ease;
+	z-index: 10;
 }
 
 .rating-value {
 	color: #10a37f;
 	font-weight: 700;
+	/* clamp(min, preferred, max) - keep the order min, preferred, max */
 	font-size: clamp(26px, 6vw, 48px);
 	line-height: 1;
-	/* Prevent large underline image from pushing content on small screens */
-	@media (max-width: 760px) {
-		.hero-title .accent .accent-underline {
-			max-width: 220px;
-			width: 60%;
-		}
+}
+
+/* Prevent large underline image from pushing content on small screens */
+@media (max-width: 760px) {
+	.hero-title .accent .accent-underline {
+		max-width: 220px;
+		width: 60%;
 	}
 }
 
@@ -317,6 +335,40 @@ figure {
 	font-weight: 600;
 	font-size: 18px;
 	margin-left: 6px;
+}
+
+.stats-card {
+	position: absolute;
+	right: 0px;
+	bottom: 120px;
+	background: #fff;
+	padding: 25px 30px;
+	border-radius: 12px;
+	box-shadow: 0 8px 26px rgba(12, 12, 12, 0.08);
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	transition: transform 200ms ease, opacity 200ms ease;
+	z-index: 10;
+}
+
+.stats-icon {
+	color: #e94157;
+	font-size: 24px;
+}
+
+.stats-value {
+	color: #333;
+	font-weight: 700;
+	font-size: clamp(20px, 4vw, 32px);
+	line-height: 1;
+}
+
+.stats-text {
+	color: #666;
+	font-weight: 500;
+	font-size: 16px;
+	margin-top: 4px;
 }
 
 
@@ -377,7 +429,8 @@ figure {
 
 .card-title {
 	margin: 18px 0 8px;
-	font-size: clamp(21px, 1.6vw, 18px);
+	/* ensure min <= preferred <= max for clamp */
+	font-size: clamp(18px, 1.6vw, 21px);
     font-weight: 500;
 }
 
@@ -385,7 +438,8 @@ figure {
 .card-body {
 	color: #666;
 	line-height: 1.7;
-	font-size: clamp(16px, 1.4vw, 15px);
+	/* fix clamp ordering: min, preferred, max */
+	font-size: clamp(15px, 1.4vw, 16px);
 }
 
 /* -----------------------------
@@ -396,8 +450,10 @@ figure {
 		grid-template-columns: repeat(2, 1fr);
 	}
 
+	/* avoid fixed large widths on smaller screens */
 	.hero-right {
-		width: 500px;
+		width: 100%;
+		max-width: 500px;
 	}
 }
 
@@ -412,17 +468,25 @@ figure {
 	.hero-inner {
 		flex-direction: column-reverse;
 		gap: 28px;
+		align-items: center;
 	}
 
 	.hero-right {
 		width: 100%;
+		max-width: 500px;
 	}
 
 	.hero-left {
 		text-align: center;
+		width: 100%;
+	}
+
+	.hero-ctas {
+		justify-content: center;
 	}
 
 	.rating-card {
+		/* make floating cards flow with the layout on stacked hero */
 		position: relative;
 		left: auto;
 		bottom: auto;
@@ -479,7 +543,8 @@ figure {
 		padding: 14px 10px;
 	}
 
-	.nav-toggle:checked+.nav-toggle-label+.main-nav {
+	/* checkbox + label + nav arrangement: make selector more permissive to match markup */
+	.nav-toggle:checked ~ .main-nav {
 		display: block;
 	}
 
@@ -497,7 +562,7 @@ figure {
 
 	.hero {
 		padding-top: 24px;
-		padding-bottom: 40px;
+		padding-bottom: 60px;
 	}
 
 	.site-header {
@@ -508,26 +573,64 @@ figure {
 	.hero-ctas {
 		flex-direction: column;
 		gap: 10px;
+		align-items: stretch;
+		margin-bottom: 30px;
 	}
 
 	.hero-ctas .btn {
 		width: 100%;
+		max-width: 280px;
+		margin: 0 auto;
 	}
 
 	.hero-left {
 		max-width: 100%;
 	}
 
+	/* On small screens keep title centered for better balance */
 	.hero-title {
-		text-align: left;
+		text-align: center;
 	}
 }
-	/* allow illustrations to scale down gracefully on small screens */
-	@media (max-width: 420px) {
-		.card-illustration img {
-			height: 110px;
-		}
+
+/* refine rating and stats card positions for narrow screens so they don't overflow */
+@media (max-width: 680px) {
+	.rating-card {
+		right: 16px;
+		left: auto;
+		top: 16px;
+		bottom: auto;
+		transform: none;
+		margin: 0;
+		padding: 12px 16px;
+		position: absolute;
 	}
+
+	.stats-card {
+		left: 12px;
+		right: auto;
+		bottom: 12px;
+		top: auto;
+		transform: none;
+		margin: 0;
+		padding: 12px 16px;
+		position: absolute;
+	}
+}
+
+/* accessible focus style for the nav toggle */
+.nav-toggle-label:focus,
+.nav-toggle-label:focus-visible {
+	outline: 3px solid rgba(233,69,87,0.25);
+	outline-offset: 3px;
+}
+
+/* allow illustrations to scale down gracefully on very small screens */
+@media (max-width: 420px) {
+	.card-illustration img {
+		height: 110px;
+	}
+}
 
 /* very small phones */
 @media (max-width: 420px) {
@@ -545,13 +648,13 @@ figure {
 }
 
 /* Additional breakpoints to improve responsiveness on large/smaller desktops */
-@media (max-width: 1400px) and (min-width: 1101px) {
+@media (min-width: 1101px) and (max-width: 1400px) {
 	.cards {
 		grid-template-columns: repeat(3, 1fr);
 	}
 }
 
-@media (max-width: 1200px) and (min-width: 981px) {
+@media (min-width: 981px) and (max-width: 1200px) {
 	.hero-right {
 		width: 48%;
 	}
@@ -569,20 +672,37 @@ figure {
 	.hero-visual {
 		display: grid;
 		grid-template-columns: 1fr;
+		position: relative;
 	}
 
 	.rating-card {
 		position: absolute;
-		right: 12px;
-		top: 12px;
+		right: 101px;
+		top: 197px;
 		left: auto;
 		bottom: auto;
 		transform: translateY(0);
 		margin: 0;
+		padding: 15px 20px;
+	}
+
+	.stats-card {
+		position: absolute;
+		left: 12px;
+		bottom: 12px;
+		right: auto;
+		top: auto;
+		transform: translateY(0);
+		margin: 0;
+		padding: 15px 20px;
 	}
 
 	.hero-title {
 		text-align: center;
+	}
+
+	.hero-ctas {
+		justify-content: center;
 	}
 }
 
